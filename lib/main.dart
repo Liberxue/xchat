@@ -121,6 +121,7 @@ void main()=> runApp(MaterialApp(
   // 修改Appbar颜色
   theme: ThemeData.light().copyWith(
     primaryColor: Color(AppColors.AppbarColor),
+    cardColor: Color(AppColors.AppbarColor)
   ),
   home: HomeScreen(),
 ));

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../appconfig.dart' show AppIconsConfig,AppColors;
+enum RightActionItem{
+  Group_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT
+}
 class NavigationIconView{
   final String _title;
   final IconData _icon;
@@ -27,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex=0;//默认选择BottomNavigationBar【微信】TAB
     List<NavigationIconView>_nvigationIconViews;
 
   void initState() { 
@@ -72,11 +76,26 @@ class _HomeScreenState extends State<HomeScreen> {
         fontFamily: AppIconsConfig.IconFontFamily,
       ),
       activeIcon:IconData(
-        0xe600;,
+        0xe600,
         fontFamily: AppIconsConfig.IconFontFamily,
       )
     ),
     ];
+    }
+
+
+    _buildPopupMenuItem(int iconName,String title){
+    return Row(
+      children: <Widget>[
+      Icon(IconData(
+       iconName,
+       fontFamily: AppIconsConfig.IconFontFamily,
+      ),size: 22.0,color:const Color(AppColors.AppbarPopupMenuColor),
+    ),
+    Container(width: 14.0,),
+    Text(title,style:TextStyle(color: const Color(AppColors.AppbarPopupMenuColor)),),//加const 编译时间固定提升程序运行效率
+    ],
+  );
     }
   @override
   Widget build(BuildContext context) {
@@ -88,23 +107,56 @@ items: _nvigationIconViews.map((NavigationIconView view){
 
   return view.item;
 }).toList(),
-currentIndex: 0,
+currentIndex: _currentIndex,
 type: BottomNavigationBarType.fixed,
 onTap: (int index){
+  setState(() {
+      _currentIndex=index;
+    });
   print("点击的是第$index个Tab");
 },
     );
     return Scaffold(appBar: AppBar(
       title: Text("微信"),
+      elevation: 0.0,//扁平化 appBar
       actions: [
-        IconButton(
-          icon: Icon(Icons.search),
-          onPressed: (){print("点击搜索");},
-        ),
-        IconButton(
-          icon: Icon(Icons.add),
-          onPressed: (){print("点击add下拉");},
-        )
+        // IconButton(
+        //   icon: Icon(Icons.add),
+        //   onPressed: (){print("点击add下拉");},
+        // ),
+       Container(width: 16.0,),
+       PopupMenuButton(
+         itemBuilder: (BuildContext Context){
+           return <PopupMenuItem<RightActionItem>>[
+            PopupMenuItem(
+              // child: Text('发起群聊'),
+              child: _buildPopupMenuItem(0xe603, "发起群聊"),
+              value: RightActionItem.Group_CHAT,
+            ),
+            PopupMenuItem(
+              // child: Text('发起群聊'),
+              child: _buildPopupMenuItem(0xe61d, "添加朋友"),
+              value: RightActionItem.ADD_FRIEND,
+            ),
+            PopupMenuItem(
+              // child: Text('发起群聊'),
+              child: _buildPopupMenuItem(0xe7c8, "扫一扫"),
+              value: RightActionItem.QR_SCAN,
+            ),
+            PopupMenuItem(
+              // child: Text('发起群聊'),
+              child: _buildPopupMenuItem(0xe62a, "收付款"),
+              value: RightActionItem.PAYMENT,
+            ),
+           ];
+         },
+              
+         icon: Icon(IconData(
+           0xe605,
+          fontFamily: AppIconsConfig.IconFontFamily,
+      ),size: 22.0,),
+      onSelected: (RightActionItem selected){print('点击事件:$selected');},
+       )
       ],
      // backgroundColor: Color(0xff303030),//直接暴力修改Appbrr
     ),
