@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(MyApp());//人口同node js 写法一样😄
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatelessWidget { //StatelessWidget 无状态组件 相当于常量。。。。赋值渲染之后不可被修改
   // This widget is the root of your application.
-  @override
+  @override //子类重写方法
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp(//return  MaterialApp组件 
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
@@ -20,13 +20,13 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Demo Home Page'),//整个MaterialApp主要显示的内容 
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class MyHomePage extends StatefulWidget { //StatefulWidget 组件内部可以维持变量在渲染之后可以更改
+  MyHomePage({Key key, this.title}) : super(key: key);//一个奇葩的构造函数。。。。这写法也是够了。把key传给title
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -40,14 +40,14 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();//重写集成_MyHomePageState实现类
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> {//下划线跟go小写一样代表private。。。 无下滑线public方法。。。
   int _counter = 0;
 
   void _incrementCounter() {
-    setState(() {
+    setState(() { //貌似渲染重绘跟react 一样。。。。
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
