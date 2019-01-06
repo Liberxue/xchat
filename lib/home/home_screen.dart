@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../appconfig.dart' show AppIconsConfig,AppColors;
+import './conversation_page.dart';
+
 enum RightActionItem{
   Group_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT
 }
@@ -85,10 +87,12 @@ class _HomeScreenState extends State<HomeScreen> {
     _pageController=PageController(initialPage: _currentIndex); //初始化PageController
 //初始化 _pages集合
     _pages=[
-          Container(color: Colors.blue),
-          Container(color: Colors.yellowAccent),
-          Container(color: Colors.purple),
+          // Container(color: Colors.blue),
+          ConversationPage(),
+          Container(color: Colors.black26),
+          Container(color: Colors.black54),
           Container(color: Colors.black87),
+
       ];
     }
     _buildPopupMenuItem(int iconName,String title){
