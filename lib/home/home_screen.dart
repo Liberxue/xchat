@@ -30,9 +30,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  PageController _pageController; //添加pageview class
   int _currentIndex=0;//默认选择BottomNavigationBar【微信】TAB
-    List<NavigationIconView>_nvigationIconViews;
-
+    List<NavigationIconView> _nvigationIconViews;
+    List <Widget> _pages; //定义list集合显示页数
   void initState() { 
     super.initState();
     _nvigationIconViews=[
@@ -81,9 +82,15 @@ class _HomeScreenState extends State<HomeScreen> {
       )
     ),
     ];
+    _pageController=PageController(initialPage: _currentIndex); //初始化PageController
+//初始化 _pages集合
+    _pages=[
+          Container(color: Colors.blue),
+          Container(color: Colors.yellowAccent),
+          Container(color: Colors.purple),
+          Container(color: Colors.black87),
+      ];
     }
-
-
     _buildPopupMenuItem(int iconName,String title){
     return Row(
       children: <Widget>[
@@ -112,9 +119,9 @@ type: BottomNavigationBarType.fixed,
 onTap: (int index){
   setState(() {
       _currentIndex=index;
+      _pageController.animateToPage(_currentIndex,duration: Duration(milliseconds: 200),curve: Curves.elasticIn);
     });
-  print("点击的是第$index个Tab");
-},
+    },
     );
     return Scaffold(appBar: AppBar(
       title: Text("微信"),
@@ -160,8 +167,21 @@ onTap: (int index){
       ],
      // backgroundColor: Color(0xff303030),//直接暴力修改Appbrr
     ),
-    body: Container(
-      color: Colors.white,
+    // body: Container(
+    //   color: Colors.white,
+    // ),
+    body: PageView.builder(
+      itemBuilder: (BuildContext context,int index){
+        return _pages[index];
+      },
+      controller: _pageController,
+        itemCount: _pages.length,
+        onPageChanged: (int index){
+          setState(() {
+                      _currentIndex=index;
+                    });
+          print("当前滑动的页面是第$index页");
+        },
     ),
     bottomNavigationBar:botNavBar,
     );
