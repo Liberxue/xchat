@@ -23,6 +23,14 @@ class  Conversation {
   final bool isMute;
   final int unReadMsgCount;
   final bool displayDot;
+  bool isAvaterFormNet(){
+    // 判断http || https 为网络图片 
+    if(this.avatar.indexOf('http')==0||
+    this.avatar.indexOf('https')==0){
+          return true;
+    }
+        return false;
+  }
 }
 const  List<Conversation> mockConversations=[
 const Conversation(

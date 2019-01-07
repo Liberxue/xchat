@@ -8,7 +8,8 @@ class AppColors{
   static const ConverstationIemBG=0xfffffffff;
   static const DesTextColor=0xff9e9e9e;
   static const DividerColor=0xffd9d9d9;
-
+  static const NotifyDotBg=0xffff3e3e;
+  static const NotifyDotText=0xfffffffff;
 }
 
 class AppStyles{
@@ -20,9 +21,14 @@ class AppStyles{
     fontSize:12.0,
     color: Color(AppColors.DesTextColor)
   );
+  static const UnreadMsgCountDotStyle=TextStyle(
+    fontSize: 12.0,
+    color: Color(AppColors.NotifyDotText),
+  );
 }
 class AppIconsConfig {
   static const IconFontFamily="appIconFont";
   static const ConversationAvaterSize=48.0;
   static const DividerWidth=1.0;
+  static const UnReadMsgNotifyDotSize=20.0;
 }

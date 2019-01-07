@@ -12,6 +12,32 @@ import './conversation.dart'show Conversation,mockConversations;
 
    @override
    Widget build(BuildContext context) {
+     // 定义获取图片avater初始化头像组件
+     Widget avater;
+     if (conversation.isAvaterFormNet()){
+        avater=Image.network(
+          conversation.avatar,
+          width: AppIconsConfig.ConversationAvaterSize,
+          height: AppIconsConfig.ConversationAvaterSize,
+         );
+      }else{
+       avater=Image.asset(
+          conversation.avatar,
+          width: AppIconsConfig.ConversationAvaterSize,
+          height: AppIconsConfig.ConversationAvaterSize,
+      );
+     }
+     // 定义未读消息角标组件
+     Widget unreadMsgCountText=Container(
+       width: AppIconsConfig.UnReadMsgNotifyDotSize,
+       height: AppIconsConfig.UnReadMsgNotifyDotSize,
+       decoration: BoxDecoration(
+         borderRadius:BorderRadius.circular(AppIconsConfig.UnReadMsgNotifyDotSize/2.0),//圆角
+        color: Color(AppColors.NotifyDotBg),//圆点背景颜色
+       ),
+       child:Text('99',style:AppStyles.UnreadMsgCountDotStyle),
+     );
+
      return Container(
        padding: const EdgeInsets.all(10.0),//边距
        decoration: BoxDecoration(
@@ -24,10 +50,8 @@ import './conversation.dart'show Conversation,mockConversations;
        child: Row(
          crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.asset('assets/images/default_nor_avatar.png',
-          width: AppIconsConfig.ConversationAvaterSize,
-          height: AppIconsConfig.ConversationAvaterSize,
-          ),
+          // Image.asset('assets/images/default_nor_avatar.png',
+          avater,
           Container(width: 10.0,),
       Expanded(
         child:Column(
