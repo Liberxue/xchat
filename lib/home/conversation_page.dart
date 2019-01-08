@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../appconfig.dart' show AppColors,AppStyles,AppIconsConfig;
-import './conversation.dart'show Conversation,mockConversations;
+import './conversation.dart'show Conversation,mockConversations,Device;
+
  class _ConversationItem extends StatelessWidget {
    const _ConversationItem({Key key,this.conversation})
    :assert(conversation!=null),
@@ -58,14 +59,6 @@ import './conversation.dart'show Conversation,mockConversations;
     }else{
       avatarContainer=avater;
     }
-    //定义勿扰模式icon
-    // Widget muteIcon=Icon(IconData(
-    //   0xe669,
-    //   fontFamily: AppIconsConfig.IconFontFamily,
-    //   ),
-    //   color: Color(AppColors.CibversationMuteIconBg),
-    //   size: AppIconsConfig.CibversationMuteIconSize,
-    // );
     var _rightStyle=<Widget> [
         Text(conversation.updateAT,style:AppStyles.DesStyle,),
         // Container(height: 10.0,),
@@ -112,11 +105,11 @@ import './conversation.dart'show Conversation,mockConversations;
           crossAxisAlignment: CrossAxisAlignment.start ,
           children: <Widget>[
             Text(conversation.title,style: AppStyles.TitleStyle,),
-             Text(conversation.des,style: AppStyles.DesStyle,),
+            Text(conversation.des,style: AppStyles.DesStyle,),
           ],
         ),
         ),
-          Container(width: 10.0,),
+        Container(width: 10.0,),
          Column(
            children: _rightStyle,
          )
@@ -125,6 +118,75 @@ import './conversation.dart'show Conversation,mockConversations;
      );
    }
  }
+ // DeviceLoginItem
+class _DeviceLoginItem extends StatelessWidget {
+  const _DeviceLoginItem({
+    this.device:Device.WIN
+    }):
+  assert(device !=null)
+  final Device device;
+  int get IconName{
+    return device==Device.WIN ? 0xe827:0xe640;
+  }
+  String get DeviceName{
+    return device==Device.WIN ? 'Windows':'Mac';
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(left: 24.0, top: 10.0, right: 24.0, bottom: 10.0),
+      decoration:BoxDecoration(
+          border: Border(
+            bottom: BorderSide(
+              width: AppIconsConfig.DividerWidth,color: Color(AppColors.DividerColor)
+            ),
+      ),
+      color: Color(AppColors.DeviceLoginItemBg)
+    ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Icon(IconData(
+              this.IconName,
+              fontFamily: AppIconsConfig.IconFontFamily,
+          ),
+          size: 24.0,color: Color(AppColors.DeviceLoginItemIcon),
+          ),
+           SizedBox(width: 16.0),
+           Text('$DeviceName 微信已登陆，手机通知已关闭。',style:AppStyles.DeviceLoginItemStyle,),
+        ],
+      ),
+    );
+  }
+}
+
+class _AddSessionState extends StatelessWidget {
+  //...
+  @override
+  Widget build(BuildContext context) {
+    return new SimpleDialog(title: new Text("添加会话"), children: <Widget>[
+      new Container(
+          margin: const EdgeInsets.symmetric(horizontal: 23.0),
+          child: new Row(
+            children: <Widget>[
+              new Flexible(
+                  child: new TextField(
+                // controller: _phoneController,
+                keyboardType: TextInputType.phone,
+                decoration:
+                    new InputDecoration.collapsed(hintText: '点击此处输入手机号码'),
+              )),
+              new IconButton(
+                  icon: new Icon(Icons.search),
+                  onPressed: () {
+                    // _handleFind();
+                  }),
+            ],
+          )),
+    ]);
+  }
+}
 class ConversationPage extends StatefulWidget {
   @override
   _ConversationPageState createState() => _ConversationPageState();
@@ -135,6 +197,9 @@ class _ConversationPageState extends State<ConversationPage> {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemBuilder: (BuildContext context,int index){
+        if (index==0){
+          return _DeviceLoginItem(device: Device.MAC,);
+        }
         return _ConversationItem(conversation:mockConversations[index]);
       },
       itemCount: mockConversations.length,

@@ -11,6 +11,9 @@ class AppColors{
   static const NotifyDotBg=0xffff3e3e;
   static const NotifyDotText=0xfffffffff;
   static const CibversationMuteIconBg=0xffd8d8d8;
+  static const DeviceLoginItemBg=0xfff5f5f5;
+  static const DeviceLoginItemTextSize=0xff606062;
+   static const DeviceLoginItemIcon=0xff606062;
 }
 
 class AppStyles{
@@ -26,6 +29,10 @@ class AppStyles{
     fontSize: 12.0,
     color: Color(AppColors.NotifyDotText),
   );
+  static const DeviceLoginItemStyle=TextStyle(
+    fontSize: 13.0,
+    color: Color(AppColors.DeviceLoginItemTextSize),
+  );
 }
 class AppIconsConfig {
   static const IconFontFamily="appIconFont";
@@ -33,4 +40,5 @@ class AppIconsConfig {
   static const DividerWidth=1.0;
   static const UnReadMsgNotifyDotSize=20.0;
   static const CibversationMuteIconSize=12.0;
+  // static const DeviceLoginItemHeight=32.0;
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../appconfig.dart' show AppIconsConfig,AppColors;
 import './conversation_page.dart';
-
+import '../simpledialog.dart' show showalertDialog;
 enum RightActionItem{
   Group_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT
 }
@@ -10,7 +10,6 @@ class NavigationIconView{
   final IconData _icon;
   final IconData _activeIcon;
   final BottomNavigationBarItem item;
-
   NavigationIconView({Key key, String title, IconData icon, IconData activeIcon}) :
    _title=title,
    _icon=icon,
@@ -113,10 +112,10 @@ class _HomeScreenState extends State<HomeScreen> {
     // return Container(
     // color: Colors.black12,
     // );
-    final BottomNavigationBar botNavBar=BottomNavigationBar(
+final BottomNavigationBar botNavBar=BottomNavigationBar(
 items: _nvigationIconViews.map((NavigationIconView view){
 
-  return view.item;
+return view.item;
 }).toList(),
 currentIndex: _currentIndex,
 type: BottomNavigationBarType.fixed,
@@ -166,7 +165,7 @@ onTap: (int index){
            0xe605,
           fontFamily: AppIconsConfig.IconFontFamily,
       ),size: 22.0,),
-      onSelected: (RightActionItem selected){print('点击事件:$selected');},
+      onSelected: (RightActionItem selected){print('点击事件就斤斤计较:$selected');},
        )
       ],
      // backgroundColor: Color(0xff303030),//直接暴力修改Appbrr
