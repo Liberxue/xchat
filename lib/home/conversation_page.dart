@@ -202,7 +202,7 @@ class _ConversationPageState extends State<ConversationPage> {
         }
         return _ConversationItem(conversation:mockConversations[index]);
       },
-      itemCount: mockConversations.length,
+      itemCount: mockConversations.length+1,//解决Devicelogin占用bug
 
     );
   }
