@@ -200,7 +200,7 @@ class _ConversationPageState extends State<ConversationPage> {
         if (index==0){
           return _DeviceLoginItem(device: Device.MAC,);
         }
-        return _ConversationItem(conversation:mockConversations[index]);
+        return _ConversationItem(conversation:mockConversations[index-1]);
       },
       itemCount: mockConversations.length+1,//解决Devicelogin占用bug
 
