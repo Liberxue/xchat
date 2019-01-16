@@ -13,6 +13,7 @@ environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
 
 dependencies:
+  http: ^0.11.0     # --That library is in a package that is not known. Maybe you forgot to mention it in your pubspec.yaml file!!!!!!! 
   flutter:
     sdk: flutter
 

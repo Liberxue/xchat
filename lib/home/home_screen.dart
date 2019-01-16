@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../appconfig.dart' show AppIconsConfig,AppColors;
 import './conversation_page.dart';
-import '../simpledialog.dart' show showalertDialog;
+import './Contactlist.dart';
 enum RightActionItem{
   Group_CHAT,ADD_FRIEND,QR_SCAN,PAYMENT
 }
@@ -88,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
     _pages=[
           // Container(color: Colors.blue),
           ConversationPage(),
-          Container(color: Colors.black26),
+          Contactlist(),
           Container(color: Colors.black54),
           Container(color: Colors.black87),
 

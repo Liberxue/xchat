@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../appconfig.dart' show AppColors,AppStyles,AppIconsConfig;
-import './conversation.dart'show Conversation,mockConversations,Device;
+import './conversation.dart'show Conversation,mockConversationData,Device;
 
  class _ConversationItem extends StatelessWidget {
    const _ConversationItem({Key key,this.conversation})
@@ -123,7 +123,7 @@ class _DeviceLoginItem extends StatelessWidget {
   const _DeviceLoginItem({
     this.device:Device.WIN
     }):
-  assert(device !=null)
+  assert(device !=null);
   final Device device;
   int get IconName{
     return device==Device.WIN ? 0xe827:0xe640;
@@ -195,6 +195,7 @@ class ConversationPage extends StatefulWidget {
 class _ConversationPageState extends State<ConversationPage> {
   @override
   Widget build(BuildContext context) {
+    var mockConversations=mockConversationData['Data'];
     return ListView.builder(
       itemBuilder: (BuildContext context,int index){
         if (index==0){
